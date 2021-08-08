@@ -1,5 +1,19 @@
+cc := "/opt/microchip/xc8/v2.30/bin/xc8-cc"
+cc_options := "-mcpu=12F1612 -o ../bin/main.hex"
+files := "main.c"
+
+ipecmd := "/opt/microchip/mplabx/v5.50/mplab_platform/mplab_ipe/ipecmd.sh"
+ipecmd_program := '-P12F1612 -TPSNAP -F"../bin/main.hex" -M'
+ipecmd_erase := '-P12F1612 -TPSNAP -E'
+
 build:
-	
+	{{cc}} {{cc_options}} {{files}}
+
+ipecmd_program:
+	{{ipecmd}} {{ipecmd_program}}
+
+ipecmd_erase:
+	{{ipecmd}} {{ipecmd_erase}}
 
 clean:
-	rm ../bin/main.*
+	rm ../bin/main.* ../bin/compiler_support.* ../bin/startup.* ./constant-conversion.* ./MPLABXLog.*
